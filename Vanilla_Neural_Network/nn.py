@@ -1,4 +1,12 @@
 import numpy as np
+import csv
+
+#### data preprocessing ####
+def import_file(csvfile):
+    pass
+
+def scale(data):
+    pass
 
 #### helper function ####
 def sigmoid(Z):
