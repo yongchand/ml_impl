@@ -1,8 +1,9 @@
+import csv
 import numpy as np
 import pandas as pd
 
 #### data preprocessing ####
-def import_train_file(file):
+def import_train_file():
     train = pd.read_csv('train.csv')
     train = np.array(train)
     m, n = train.shape
@@ -19,6 +20,11 @@ def import_train_file(file):
     X_train_val = X_train_val/255
     return X_train_train, y_train_train, X_train_val, y_train_val
 
+def import_test_file():
+    test = pd.read_csv('test.csv')
+    test = np.array(test)
+    X_test = test/255
+    return X_test.T
 
 #### helper function ####
 def sigmoid(Z):
@@ -192,3 +198,13 @@ def gradient_descent(X, Y, iterations, dimension, alpha):
             print("\n accuracy: ",  get_accuracy(get_predictions(A_final), Y))
 
     return parameter
+
+
+### write data ###
+def write(y_test):
+    header = ['ImageId', 'Label']
+    with open('result.csv', 'w', newline='', encoding = 'UTF8') as f:
+        writer = csv.writer(f)
+        writer.writerow(header)
+        for index, value in enumerate(y_test):
+            writer.writerow([index+1, value])
